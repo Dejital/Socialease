@@ -11,6 +11,7 @@
         <ul class="menu">
             <li><a asp-controller="App" asp-action="Index">Home</a></li>
             <li><a asp-controller="App" asp-action="About">About</a></li>
+            <li><a asp-controller="App" asp-action="Contact">Contact Us</a></li>
         </ul>
         <div>
             @RenderBody()
@@ -19,6 +20,8 @@
 
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/site.js"></script>
+
+    @RenderSection("Scripts", false)
 
 </body>
 </html>
