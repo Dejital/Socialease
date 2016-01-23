@@ -7,15 +7,24 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
 <form method="post">
-    <div asp-validation-summary="ValidationSummary.ModelOnly"></div>
-    <label asp-for="Name">Name</label>
-    <input asp-for="Name"/>
-    <span asp-validation-for="Name"></span>
-    <label asp-for="Email">Email</label>
-    <input asp-for="Email"/>
-    <span asp-validation-for="Email"></span>
-    <label asp-for="Message">Message</label>
-    <textarea cols="40" rows="4" asp-for="Message"></textarea>
-    <input type="submit" class="btn btn-primary" value="Send Message"/>
-    <span asp-validation-for="Message"></span>
+    <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-muted"></div>
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input class="form-control" asp-for="Name"/>
+        <span asp-validation-for="Name" class="text-muted"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input class="form-control" asp-for="Email"/>
+        <span asp-validation-for="Email" class="text-muted"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Message">Message</label>
+        <textarea class="form-control" cols="40" rows="4" asp-for="Message"></textarea>
+        <span asp-validation-for="Message" class="text-muted"></span>
+    </div>
+    <div class="form-group">
+        <a asp-controller="App" asp-action="Index" class="btn btn-default">Cancel</a>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </div>
 </form>
