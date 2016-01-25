@@ -3,6 +3,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using Socialease.Models;
 using Socialease.Services;
 using Socialease.Services.Impl;
 
@@ -27,6 +28,9 @@ namespace Socialease
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<SocialContext>();
 #if DEBUG
             services.AddScoped<IMailService, DebugMailService>();
 #endif
