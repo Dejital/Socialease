@@ -14,8 +14,6 @@ namespace Socialease.Models
         public string Location { get; set; }
         public int? Priority { get; set; }
         public DateTime Created { get; set; }
-        public ICollection<Ping> Pings { get; set; }
-        public ICollection<Group> Groups { get; set; }
         public ICollection<SpecialDay> SpecialDays { get; set; }
     }
 }

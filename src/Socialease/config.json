@@ -1,5 +1,8 @@
 ﻿{
   "AppSettings": {
-    "SiteEmailAddress":  "socialease@sergeyk.com"
+    "SiteEmailAddress": "socialease@sergeyk.com"
+  },
+  "Data": {
+    "SocialContextConnection": "Server=(localdb)\\ProjectsV12;Database=SocialDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
   }
 }

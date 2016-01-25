@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNet.Mvc;
+using Socialease.Models;
 using Socialease.Services;
 using Socialease.ViewModels;
 
@@ -7,14 +9,17 @@ namespace Socialease.Controllers.Web
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
+        private readonly SocialContext _context;
 
-        public AppController(IMailService mailService)
+        public AppController(IMailService mailService, SocialContext context)
         {
             _mailService = mailService;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            var people = _context.People.OrderBy(p => p.Name).ToList();
             return View();
         }
 
