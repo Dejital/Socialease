@@ -2,8 +2,12 @@
 
 namespace Socialease.Models
 {
-    public class SocialContext : DbContext
+    public sealed class SocialContext : DbContext
     {
+        public SocialContext()
+        {
+            Database.EnsureCreated();
+        }
         public DbSet<Person> People { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Note> Notes { get; set; }
@@ -14,8 +18,8 @@ namespace Socialease.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PersonGroup>()
-                .HasKey(pg => new {pg.PersonId, pg.GroupId});
+            //modelBuilder.Entity<PersonGroup>()
+            //    .HasKey(pg => new {pg.PersonId, pg.GroupId});
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -26,12 +26,14 @@ namespace Socialease.Migrations
                 name: "PersonGroup",
                 columns: table => new
                 {
-                    PersonId = table.Column<int>(nullable: false),
-                    GroupId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    GroupId = table.Column<int>(nullable: false),
+                    PersonId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonGroup", x => new { x.PersonId, x.GroupId });
+                    table.PrimaryKey("PK_PersonGroup", x => x.Id);
                 });
             migrationBuilder.CreateTable(
                 name: "PingType",

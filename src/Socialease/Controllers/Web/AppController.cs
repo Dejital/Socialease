@@ -9,18 +9,18 @@ namespace Socialease.Controllers.Web
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
-        private readonly SocialContext _context;
+        private readonly ISocialRepository _repository;
 
-        public AppController(IMailService mailService, SocialContext context)
+        public AppController(IMailService mailService, ISocialRepository repository)
         {
             _mailService = mailService;
-            _context = context;
+            _repository = repository;
         }
 
         public IActionResult Index()
         {
-            var people = _context.People.OrderBy(p => p.Name).ToList();
-            return View();
+            var pingTypes = _repository.GetAllPingTypes();
+            return View(pingTypes);
         }
 
         public IActionResult About()

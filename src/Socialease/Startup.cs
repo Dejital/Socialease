@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Socialease.Models;
 using Socialease.Services;
@@ -28,18 +29,24 @@ namespace Socialease
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddLogging();
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<SocialContext>();
+            services.AddTransient<SocialContextSeedData>();
+            services.AddScoped<ISocialRepository, SocialRepository>();
 #if DEBUG
             services.AddScoped<IMailService, DebugMailService>();
 #endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, SocialContextSeedData seedData, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddDebug(LogLevel.Warning);
+
             app.UseStaticFiles();
+
             app.UseMvc(config =>
             {
                 config.MapRoute(
@@ -48,6 +55,8 @@ namespace Socialease
                     defaults: new {controller = "App", action = "Index"}
                     );
             });
+
+            seedData.EnsureSeedData();
         }
 
         // Entry point for the application.

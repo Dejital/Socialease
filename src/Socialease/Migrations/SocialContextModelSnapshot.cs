@@ -70,11 +70,14 @@ namespace Socialease.Migrations
 
             modelBuilder.Entity("Socialease.Models.PersonGroup", b =>
                 {
-                    b.Property<int>("PersonId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("GroupId");
 
-                    b.HasKey("PersonId", "GroupId");
+                    b.Property<int>("PersonId");
+
+                    b.HasKey("Id");
                 });
 
             modelBuilder.Entity("Socialease.Models.Ping", b =>
