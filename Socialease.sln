@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4CCF6149-DF71-40F2-80F5-8A5030D559E7}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Socialease", "src\Socialease\Socialease.xproj", "{53B89AC7-A72D-4D40-BC48-CDAEA78C363C}"
