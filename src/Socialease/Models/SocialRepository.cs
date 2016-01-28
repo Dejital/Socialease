@@ -41,5 +41,15 @@ namespace Socialease.Models
                 throw;
             }
         }
+
+        public void AddPingType(PingType pingType)
+        {
+            _context.Add(pingType);
+        }
+
+        public bool SaveAll()
+        {
+            return _context.SaveChanges() > 0;
+        }
     }
 }

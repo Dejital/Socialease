@@ -6,5 +6,7 @@ namespace Socialease.Models
     {
         IEnumerable<Person> GetAllPeople();
         IEnumerable<PingType> GetAllPingTypes();
+        void AddPingType(PingType pingType);
+        bool SaveAll();
     }
 }

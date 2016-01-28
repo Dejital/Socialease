@@ -1,3 +1,5 @@
+using System;
+
 namespace Socialease.Models
 {
     public class PingType

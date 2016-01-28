@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +9,8 @@ using Newtonsoft.Json.Serialization;
 using Socialease.Models;
 using Socialease.Services;
 using Socialease.Services.Impl;
+using Socialease.ViewModels;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace Socialease
 {
@@ -49,8 +52,13 @@ namespace Socialease
         public void Configure(IApplicationBuilder app, SocialContextSeedData seedData, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddDebug(LogLevel.Warning);
-
+ 
             app.UseStaticFiles();
+
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<PingType, PingTypeViewModel>().ReverseMap();
+            });
 
             app.UseMvc(config =>
             {
