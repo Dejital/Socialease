@@ -64,5 +64,10 @@ namespace Socialease.Models
                 throw;
             }
         }
+
+        public void AddPerson(Person person)
+        {
+            _context.Add(person);
+        }
     }
 }

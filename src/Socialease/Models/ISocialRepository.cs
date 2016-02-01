@@ -9,5 +9,6 @@ namespace Socialease.Models
         void AddPingType(PingType pingType);
         bool SaveAll();
         Person GetPersonById(int id);
+        void AddPerson(Person person);
     }
 }

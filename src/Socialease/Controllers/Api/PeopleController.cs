@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNet.Mvc;
 using Socialease.Models;
@@ -39,6 +38,33 @@ namespace Socialease.Controllers.Api
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { Message = ex.Message });
             }
+        }
+
+        [HttpPost("")]
+        public JsonResult Post([FromBody] PersonViewModel vm)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var person = Mapper.Map<Person>(vm);
+                    _logger.LogInformation("Attempting to save a new Person.");
+                    _repository.AddPerson(person);
+                    if (_repository.SaveAll())
+                    {
+                        Response.StatusCode = (int) HttpStatusCode.Created;
+                        return Json(Mapper.Map<Person>(person));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Failed to save new person.", ex);
+                Response.StatusCode = (int) HttpStatusCode.BadRequest;
+                return Json("Failed to save new person.");
+            }
+            Response.StatusCode = (int) HttpStatusCode.BadRequest;
+            return Json(new { Message = "Failed", ModelState = ModelState});
         }
     }
 }
