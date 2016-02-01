@@ -51,5 +51,18 @@ namespace Socialease.Models
         {
             return _context.SaveChanges() > 0;
         }
+
+        public Person GetPersonById(int id)
+        {
+            try
+            {
+                return _context.People.FirstOrDefault(p => p.Id == id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Could not get person with id {id} from database.", ex);
+                throw;
+            }
+        }
     }
 }

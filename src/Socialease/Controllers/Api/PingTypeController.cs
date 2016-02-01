@@ -49,7 +49,7 @@ namespace Socialease.Controllers.Api
             {
                 _logger.LogError("Failed to save a new Ping Type.", ex);
                 Response.StatusCode = (int) HttpStatusCode.BadRequest;
-                return Json(new {Message = ex.Message});
+                return Json(new { Message = ex.Message });
             }
             Response.StatusCode = (int) HttpStatusCode.BadRequest;
             return Json(new { Message = "Failed", ModelState = ModelState});

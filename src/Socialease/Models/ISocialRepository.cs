@@ -8,5 +8,6 @@ namespace Socialease.Models
         IEnumerable<PingType> GetAllPingTypes();
         void AddPingType(PingType pingType);
         bool SaveAll();
+        Person GetPersonById(int id);
     }
 }

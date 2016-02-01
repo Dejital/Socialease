@@ -58,6 +58,7 @@ namespace Socialease
             Mapper.Initialize(config =>
             {
                 config.CreateMap<PingType, PingTypeViewModel>().ReverseMap();
+                config.CreateMap<Person, PersonViewModel>().ReverseMap();
             });
 
             app.UseMvc(config =>
