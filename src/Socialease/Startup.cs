@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -37,6 +38,13 @@ namespace Socialease
                 {
                     opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 });
+            services.AddIdentity<SocialUser, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 8;
+                config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
+            })
+            .AddEntityFrameworkStores<SocialContext>();
             services.AddLogging();
             services.AddEntityFramework()
                 .AddSqlServer()
@@ -49,11 +57,13 @@ namespace Socialease
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, SocialContextSeedData seedData, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, SocialContextSeedData seedData, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddDebug(LogLevel.Warning);
  
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             Mapper.Initialize(config =>
             {
@@ -70,7 +80,7 @@ namespace Socialease
                     );
             });
 
-            seedData.EnsureSeedData();
+            await seedData.EnsureSeedDataAsync();
         }
 
         // Entry point for the application.

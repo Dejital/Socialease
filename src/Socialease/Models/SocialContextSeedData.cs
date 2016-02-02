@@ -1,17 +1,30 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace Socialease.Models
 {
     public class SocialContextSeedData
     {
         private readonly SocialContext _context;
+        private readonly UserManager<SocialUser> _userManager;
 
-        public SocialContextSeedData(SocialContext context)
+        public SocialContextSeedData(SocialContext context, UserManager<SocialUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
-        public void EnsureSeedData()
+        public async Task EnsureSeedDataAsync()
         {
+            if (await _userManager.FindByEmailAsync("sergey@sergeyk.com") == null)
+            {
+                var testUser = new SocialUser
+                {
+                    UserName = "serge",
+                    Email = "sergey@sergeyk.com"
+                };
+                await _userManager.CreateAsync(testUser, "password");
+            }
             if (!_context.PingTypes.Any())
             {
                 _context.PingTypes.Add(new PingType() {Name = "Telephone"});

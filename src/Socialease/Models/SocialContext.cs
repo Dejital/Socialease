@@ -1,8 +1,9 @@
-﻿using Microsoft.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Data.Entity;
 
 namespace Socialease.Models
 {
-    public sealed class SocialContext : DbContext
+    public sealed class SocialContext : IdentityDbContext<SocialUser>
     {
         public SocialContext()
         {
@@ -20,6 +21,7 @@ namespace Socialease.Models
         {
             //modelBuilder.Entity<PersonGroup>()
             //    .HasKey(pg => new {pg.PersonId, pg.GroupId});
+            base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

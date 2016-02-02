@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Socialease.Models.Person>
+@{
+    ViewBag.Title = "Home Page";
+}
+<h1>People</h1>
+<ul>
+    @foreach (var person in Model)
+    {
+        <li>@person.Name</li>
+    }
+</ul>

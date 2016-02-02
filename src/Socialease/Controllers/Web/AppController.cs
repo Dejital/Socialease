@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Socialease.Models;
 using Socialease.Services;
@@ -21,6 +21,13 @@ namespace Socialease.Controllers.Web
         {
             var pingTypes = _repository.GetAllPingTypes();
             return View(pingTypes);
+        }
+
+        [Authorize]
+        public IActionResult People()
+        {
+            var people = _repository.GetAllPeople();
+            return View(people);
         }
 
         public IActionResult About()
