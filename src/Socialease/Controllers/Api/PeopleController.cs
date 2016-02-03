@@ -4,10 +4,12 @@ using Microsoft.AspNet.Mvc;
 using Socialease.Models;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
+using Microsoft.AspNet.Authorization;
 using Socialease.ViewModels;
 
 namespace Socialease.Controllers.Api
 {
+    [Authorize]
     [Route("api/people")]
     public class PeopleController : Controller
     {

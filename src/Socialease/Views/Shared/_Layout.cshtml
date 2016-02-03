@@ -21,6 +21,10 @@
                     <li><a asp-controller="App" asp-action="Index">Home</a></li>
                     <li><a asp-controller="App" asp-action="About">About</a></li>
                     <li><a asp-controller="App" asp-action="Contact">Contact Us</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
+                    }
                 </ul>
             </div>
         </nav>

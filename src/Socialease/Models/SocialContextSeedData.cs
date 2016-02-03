@@ -7,7 +7,7 @@ namespace Socialease.Models
     public class SocialContextSeedData
     {
         private readonly SocialContext _context;
-        private readonly UserManager<SocialUser> _userManager;
+        private UserManager<SocialUser> _userManager;
 
         public SocialContextSeedData(SocialContext context, UserManager<SocialUser> userManager)
         {
@@ -23,7 +23,7 @@ namespace Socialease.Models
                     UserName = "serge",
                     Email = "sergey@sergeyk.com"
                 };
-                await _userManager.CreateAsync(testUser, "password");
+                await _userManager.CreateAsync(testUser, "P@ssw0rd!");
             }
             if (!_context.PingTypes.Any())
             {
