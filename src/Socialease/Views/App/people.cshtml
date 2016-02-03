@@ -6,11 +6,14 @@
     <script type="text/javascript" src="~/lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="~/js/app.js"></script>
     <script type="text/javascript" src="~/js/peopleController.js"></script>
+    <script type="text/javascript" src="~/js/basicControls.js"></script>
 }
 <div class="row" ng-app="app">
     <h1>People</h1>
 
     <div ng-controller="peopleController as vm">
+        <div ng-show="vm.errorMessage" class="text-danger">{{ vm.errorMessage }}</div>
+        <spinner display="vm.isBusy"></spinner>
         <table class="table table-responsive table-striped">
             <tr ng-repeat="person in vm.people">
                 <td>{{ person.name }}</td>
@@ -43,11 +46,4 @@
             </div>
         </form>
     </div>
-
-    <ul>
-        @foreach (var person in Model)
-        {
-            <li>@person.Name</li>
-        }
-    </ul>
 </div>

@@ -32,7 +32,7 @@ namespace Socialease.Models
             }
             if (!_context.People.Any())
             {
-                _context.People.Add(new Person() {Name = "Arturo Bandini"});
+                _context.People.Add(new Person() {Name = "Arturo Bandini", UserName = "serge"});
             }
             _context.SaveChanges();
         }
