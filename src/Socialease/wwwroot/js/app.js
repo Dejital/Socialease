@@ -2,6 +2,6 @@
 
     "use strict";
 
-    angular.module("app", ["basicControls"]);
+    angular.module("app", ["basicControls", "ngRoute"]);
 
 })();
