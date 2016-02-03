@@ -52,11 +52,12 @@ namespace Socialease.Models
             return _context.SaveChanges() > 0;
         }
 
-        public Person GetPersonById(int id)
+        public Person GetPersonById(int id, string name)
         {
             try
             {
-                return _context.People.FirstOrDefault(p => p.Id == id);
+                return _context.People
+                    .FirstOrDefault(p => p.Id == id && p.UserName == name);
             }
             catch (Exception ex)
             {
@@ -68,6 +69,21 @@ namespace Socialease.Models
         public void AddPerson(Person person)
         {
             _context.Add(person);
+        }
+
+        public IEnumerable<Person> GetUserPeople(string name)
+        {
+            try
+            {
+                return _context.People
+                    .Where(p => p.UserName == name)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not get people from database.", ex);
+                throw;
+            }
         }
     }
 }

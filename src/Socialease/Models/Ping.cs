@@ -11,5 +11,6 @@ namespace Socialease.Models
         public DateTime Created { get; set; }
         public ICollection<Person> People { get; set; }
         public ICollection<Note> Notes { get; set; }
+        public string UserName { get; set; }
     }
 }

@@ -8,7 +8,8 @@ namespace Socialease.Models
         IEnumerable<PingType> GetAllPingTypes();
         void AddPingType(PingType pingType);
         bool SaveAll();
-        Person GetPersonById(int id);
+        Person GetPersonById(int id, string name);
         void AddPerson(Person person);
+        IEnumerable<Person> GetUserPeople(string name);
     }
 }

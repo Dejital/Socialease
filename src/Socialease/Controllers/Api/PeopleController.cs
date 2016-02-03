@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNet.Mvc;
 using Socialease.Models;
@@ -22,12 +23,21 @@ namespace Socialease.Controllers.Api
             _logger = logger;
         }
 
+        [HttpGet("")]
+        public JsonResult Get()
+        {
+            var people = _repository.GetUserPeople(User.Identity.Name);
+            var results = Mapper.Map<IEnumerable<PersonViewModel>>(people);
+
+            return Json(results);
+        }
+
         [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
             try
             {
-                var results = _repository.GetPersonById(id);
+                var results = _repository.GetPersonById(id, User.Identity.Name);
                 if (results == null)
                 {
                     return Json(null);
@@ -50,6 +60,7 @@ namespace Socialease.Controllers.Api
                 if (ModelState.IsValid)
                 {
                     var person = Mapper.Map<Person>(vm);
+                    person.UserName = User.Identity.Name;
                     _logger.LogInformation("Attempting to save a new Person.");
                     _repository.AddPerson(person);
                     if (_repository.SaveAll())
