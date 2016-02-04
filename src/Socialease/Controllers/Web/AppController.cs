@@ -26,8 +26,7 @@ namespace Socialease.Controllers.Web
         [Authorize]
         public IActionResult People()
         {
-            var people = _repository.GetAllPeople();
-            return View(people);
+            return View();
         }
 
         public IActionResult About()

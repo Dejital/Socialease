@@ -71,6 +71,11 @@ namespace Socialease.Models
             _context.Add(person);
         }
 
+        public void UpdatePerson(Person person)
+        {
+            _context.People.Update(person);
+        }
+
         public IEnumerable<Person> GetUserPeople(string name)
         {
             try

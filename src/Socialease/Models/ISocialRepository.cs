@@ -10,6 +10,7 @@ namespace Socialease.Models
         bool SaveAll();
         Person GetPersonById(int id, string name);
         void AddPerson(Person person);
+        void UpdatePerson(Person person);
         IEnumerable<Person> GetUserPeople(string name);
     }
 }

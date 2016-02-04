@@ -1,0 +1,120 @@
+﻿<div class="row" style="margin-bottom: 2em;">
+    <div class="pull-left">
+        <a href="#/" class="btn btn-sm btn-default">
+            <i class="fa fa-angle-left"></i> Back
+        </a>
+    </div>
+    <div class="pull-right">
+        <a ng-show="!vm.isEditing" class="btn btn-sm btn-default" ng-click="vm.editCommand()">
+            <i class="fa fa-pencil"></i> Edit
+        </a>
+        <div ng-show="vm.isEditing">
+            <a class="btn btn-sm btn-default" ng-click="vm.cancelCommand()">Cancel</a>
+            <a class="btn btn-sm btn-primary" ng-click="vm.saveCommand()">Save Changes</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div ng-show="vm.errorMessage"
+         class="alert alert-danger fade in"
+         role="alert">
+        {{ vm.errorMessage }}
+    </div>
+    <form class="form-horizontal"
+          name="personInformationForm"
+          ng-submit="vm.saveChanges()"
+          novalidate>
+        <div ng-show="vm.person.name || vm.isEditing" class="form-group">
+            <label class="col-sm-2 control-label" for="name">Name</label>
+            <div class="col-sm-10">
+                <input class="form-control"
+                       type="text"
+                       id="name"
+                       placeholder="Name"
+                       ng-show="vm.isEditing"
+                       ng-model="vm.person.name"
+                       required />
+                <p ng-show="!vm.isEditing"
+                   class="form-control-static">
+                    {{ vm.person.name }}
+                </p>
+            </div>
+        </div>
+        <div ng-show="vm.person.phoneNumber || vm.isEditing" class="form-group">
+            <label class="col-sm-2 control-label" for="phoneNumber">Phone Number</label>
+            <div class="col-sm-10">
+                <input class="form-control"
+                       type="text"
+                       id="phoneNumber"
+                       placeholder="Phone Number"
+                       ng-show="vm.isEditing"
+                       ng-model="vm.person.phoneNumber"/>
+                <p ng-show="!vm.isEditing"
+                   class="form-control-static">
+                    {{ vm.person.phoneNumber }}
+                </p>
+            </div>
+        </div>
+        <div ng-show="vm.person.emailAddress || vm.isEditing" class="form-group">
+            <label class="col-sm-2 control-label" for="emailAddress">Email Address</label>
+            <div class="col-sm-10">
+                <input class="form-control"
+                       type="text"
+                       id="emailAddress"
+                       placeholder="Email Address"
+                       ng-show="vm.isEditing"
+                       ng-model="vm.person.emailAddress"/>
+                <p ng-show="!vm.isEditing"
+                   class="form-control-static">
+                    {{ vm.person.emailAddress }}
+                </p>
+            </div>
+        </div>
+        <div ng-show="vm.person.relationship || vm.isEditing" class="form-group">
+            <label class="col-sm-2 control-label" for="relationship">Relationship</label>
+            <div class="col-sm-10">
+                <input class="form-control"
+                       type="text"
+                       id="relationship"
+                       placeholder="Relationship"
+                       ng-show="vm.isEditing"
+                       ng-model="vm.person.relationship"/>
+                <p ng-show="!vm.isEditing"
+                   class="form-control-static">
+                    {{ vm.person.relationship }}
+                </p>
+            </div>
+        </div>
+        <div ng-show="vm.person.location || vm.isEditing" class="form-group">
+            <label class="col-sm-2 control-label" for="location">Location</label>
+            <div class="col-sm-10">
+                <input class="form-control"
+                       type="text"
+                       id="location"
+                       placeholder="Location"
+                       ng-show="vm.isEditing"
+                       ng-model="vm.person.location" />
+                <p ng-show="!vm.isEditing"
+                   class="form-control-static">
+                    {{ vm.person.location }}
+                </p>
+            </div>
+        </div>
+        <div ng-show="vm.person.priority || vm.isEditing" class="form-group">
+            <label class="col-sm-2 control-label" for="priority">Priority</label>
+            <div class="col-sm-10">
+                <input class="form-control"
+                       type="text"
+                       id="priority"
+                       placeholder="Priority"
+                       ng-show="vm.isEditing"
+                       ng-model="vm.person.priority" />
+                <p ng-show="!vm.isEditing"
+                   class="form-control-static">
+                    {{ vm.person.priority }}
+                </p>
+            </div>
+        </div>
+    </form>
+</div>

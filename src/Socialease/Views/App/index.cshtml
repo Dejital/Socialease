@@ -1,14 +1,4 @@
-﻿@model IEnumerable<Socialease.Models.PingType>
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
-<p>Welcome to ASP.NET 5 <span id="username"></span></p>
-
 <a asp-controller="App" asp-action="people" class="btn btn-lg btn-success">View People</a>
-
-<ul>
-    @foreach (var pingType in Model)
-    {
-        <li>@pingType.Name</li>
-    }
-</ul>

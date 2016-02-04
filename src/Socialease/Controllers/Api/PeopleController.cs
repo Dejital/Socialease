@@ -72,12 +72,47 @@ namespace Socialease.Controllers.Api
             }
             catch (Exception ex)
             {
-                _logger.LogError("Failed to save new person.", ex);
+                var message = "Failed to save new person.";
+                _logger.LogError(message, ex);
                 Response.StatusCode = (int) HttpStatusCode.BadRequest;
-                return Json("Failed to save new person.");
+                return Json(message);
             }
             Response.StatusCode = (int) HttpStatusCode.BadRequest;
             return Json(new { Message = "Failed", ModelState = ModelState});
+        }
+
+        [HttpPost("{id}")]
+        public JsonResult Post(int id, [FromBody] PersonViewModel vm)
+        {
+            var errorMessage = "Failed to update a person.";
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            if (id != vm.Id)
+            {
+                _logger.LogError(errorMessage);
+                return Json(errorMessage);
+            }
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var person = Mapper.Map<Person>(vm);
+                    person.UserName = User.Identity.Name;
+                    _logger.LogInformation("Attempting to update an existing person.");
+                    _repository.UpdatePerson(person);
+                    if (_repository.SaveAll())
+                    {
+                        Response.StatusCode = (int) HttpStatusCode.OK;
+                        return Json(Mapper.Map<Person>(person));
+                    }
+                    _logger.LogError(errorMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(errorMessage, ex);
+                return Json(errorMessage);
+            }
+            return Json(errorMessage);
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿<div ng-show="vm.errorMessage" class="text-danger">{{ vm.errorMessage }}</div>
+<spinner display="vm.isBusy"></spinner>
+<table class="table table-responsive table-striped">
+    <tr ng-repeat="person in vm.people">
+        <td>{{ person.name }}</td>
+        <td>{{ person.lastPing | date }}</td>
+        <td>
+            <a ng-href="#/{{ person.id }}" class="btn btn-sm btn-primary">Manage</a>
+        </td>
+    </tr>
+</table>
+
+<form novalidate name="newPersonForm" ng-submit="vm.addPerson()">
+    <h2>Add Person</h2>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control"
+               type="text"
+               id="name"
+               name="name"
+               ng-model="vm.newPerson.name"
+               required 
+               ng-minlength="1" />
+        <span ng-show="newPersonForm.name.$error.required" 
+              class="text-warning">Name is required.</span>
+    </div>
+    <div class="form-group">
+        <input type="submit"
+               value="Add"
+               class="btn btn-primary" 
+               ng-disabled="newPersonForm.$invalid" />
+    </div>
+</form>
