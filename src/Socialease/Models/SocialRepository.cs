@@ -16,18 +16,12 @@ namespace Socialease.Models
             _logger = logger;
         }
 
-        public IEnumerable<Person> GetAllPeople()
+        public bool SaveAll()
         {
-            try
-            {
-                return _context.People.ToList();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Could not get people from database.", ex);
-                throw;
-            }
+            return _context.SaveChanges() > 0;
         }
+
+        #region PingTypes
 
         public IEnumerable<PingType> GetAllPingTypes()
         {
@@ -47,10 +41,9 @@ namespace Socialease.Models
             _context.Add(pingType);
         }
 
-        public bool SaveAll()
-        {
-            return _context.SaveChanges() > 0;
-        }
+        #endregion
+
+        #region People 
 
         public Person GetPersonById(int id, string name)
         {
@@ -90,5 +83,50 @@ namespace Socialease.Models
                 throw;
             }
         }
+
+        #endregion People
+
+        #region Notes
+
+        public Note GetNoteById(int id, string name)
+        {
+            try
+            {
+                return _context.Notes
+                    .FirstOrDefault(p => p.Id == id && p.UserName == name);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Could not get note with id {id} from database.", ex);
+                throw;
+            }
+        }
+
+        public void AddNote(Note note)
+        {
+            try
+            {
+                _context.Add(note);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Could not add new note to the database.", ex);
+                throw;
+            }
+        }
+
+        public void UpdateNote(Note note)
+        {
+            try
+            {
+                _context.Notes.Update(note);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Could not update note with id {note.Id} in the database.", ex);
+            }
+        }
+
+        #endregion Notes
     }
 }

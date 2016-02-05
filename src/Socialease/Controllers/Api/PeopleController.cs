@@ -15,9 +15,9 @@ namespace Socialease.Controllers.Api
     public class PeopleController : Controller
     {
         private readonly ISocialRepository _repository;
-        private readonly ILogger<PingTypeController> _logger;
+        private readonly ILogger<PeopleController> _logger;
 
-        public PeopleController(ISocialRepository repository, ILogger<PingTypeController> logger)
+        public PeopleController(ISocialRepository repository, ILogger<PeopleController> logger)
         {
             _repository = repository;
             _logger = logger;

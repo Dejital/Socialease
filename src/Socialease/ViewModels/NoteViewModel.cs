@@ -1,13 +1,12 @@
 using System;
 
-namespace Socialease.Models
+namespace Socialease.ViewModels
 {
-    public class Note
+    public class NoteViewModel
     {
         public int Id { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
-        public string UserName { get; set; }
         public int PersonId { get; set; }
         public int PingId { get; set; }
     }
