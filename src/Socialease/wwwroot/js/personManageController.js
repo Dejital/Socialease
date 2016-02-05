@@ -14,6 +14,8 @@
         vm.person = {};
         vm.isBusy = true;
         vm.isEditing = false;
+        vm.newNote = {};
+        vm.notes = [];
 
         $http.get('/api/people/' + $routeParams.id)
             .then(function(response) {
@@ -48,6 +50,21 @@
                 });
 
             vm.isEditing = false;
+        }
+
+        vm.addNote = function() {
+            vm.isBusy = true;
+            vm.errorMessage = '';
+
+            $http.post('/api/notes', vm.newNote)
+                .then(function(response) {
+                    vm.notes.push(response.data);
+                    vm.newNote = {};
+                }), function() {
+                vm.errorMessage = 'Failed to add new note.';
+            }.finally(function() {
+                vm.isBusy = false;
+            });
         }
 
     }
