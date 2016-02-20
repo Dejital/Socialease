@@ -17,5 +17,6 @@ namespace Socialease.Models
         Note GetNoteById(int id, string name);
         void AddNote(Note note);
         void UpdateNote(Note note);
+        IEnumerable<Note> GetUserNotes(int personId, string name);
     }
 }

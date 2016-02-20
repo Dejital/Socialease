@@ -27,6 +27,17 @@
                 vm.isBusy = false;
             });
 
+        $http.get('/api/people/' + $routeParams.id + '/notes')
+	        .then(function (response) {
+	            angular.copy(response.data, vm.notes);
+	        }, function (error) {
+	            vm.errorMessage = 'Failed to load data. ' + error;
+	        })
+	        .finally(function () {
+	            vm.isBusy = false;
+	        });
+
+
         vm.editCommand = function() {
             vm.isEditing = true;
         }
@@ -56,7 +67,7 @@
             vm.isBusy = true;
             vm.errorMessage = '';
 
-            $http.post('/api/notes', vm.newNote)
+            $http.post('/api/people/' + $routeParams.id + '/notes', vm.newNote)
                 .then(function(response) {
                     vm.notes.push(response.data);
                     vm.newNote = {};

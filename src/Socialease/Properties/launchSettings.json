@@ -17,6 +17,7 @@
     },
     "web": {
       "commandName": "web",
+      "workingDirectory": "C:\\Users\\Serge\\Documents\\Visual Studio 2015\\Projects\\Socialease\\src\\Socialease",
       "environmentVariables": {
         "Hosting:Environment": "Development"
       }

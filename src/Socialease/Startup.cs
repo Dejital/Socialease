@@ -95,6 +95,7 @@ namespace Socialease
             {
                 config.CreateMap<PingType, PingTypeViewModel>().ReverseMap();
                 config.CreateMap<Person, PersonViewModel>().ReverseMap();
+                config.CreateMap<Note, NoteViewModel>().ReverseMap();
             });
 
             app.UseMvc(config =>

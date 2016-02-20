@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
@@ -10,7 +11,7 @@ using Socialease.ViewModels;
 namespace Socialease.Controllers.Api
 {
     [Authorize]
-    [Route("api/notes")]
+    [Route("api/people/{personId}/notes")]
     public class NotesController : Controller
     {
         private readonly ISocialRepository _repository;
@@ -22,12 +23,21 @@ namespace Socialease.Controllers.Api
             _logger = logger;
         }
 
-        [HttpGet("{id}")]
-        public JsonResult Get(int id)
+        [HttpGet("")]
+        public JsonResult Get(int personId)
+        {
+            var notes = _repository.GetUserNotes(personId, User.Identity.Name);
+            var results = Mapper.Map<IEnumerable<NoteViewModel>>(notes);
+
+            return Json(results);
+        }
+
+        [HttpGet("{noteId}")]
+        public JsonResult Get(int personId, int noteId)
         {
             try
             {
-                var results = _repository.GetNoteById(id, User.Identity.Name);
+                var results = _repository.GetNoteById(noteId, User.Identity.Name);
                 if (results == null)
                 {
                     return Json(null);
@@ -36,17 +46,17 @@ namespace Socialease.Controllers.Api
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to get note with id {id}.", ex);
+                _logger.LogError($"Failed to get note with id {noteId}.", ex);
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { ex.Message });
             }
         }
 
         [HttpPost("")]
-        public JsonResult Post([FromBody] NoteViewModel vm)
+        public JsonResult Post(int personId, [FromBody] NoteViewModel vm)
         {
             Response.StatusCode = (int) HttpStatusCode.BadRequest;
-            if (!ModelState.IsValid || (vm.PersonId == 0 && vm.PingId == 0))
+            if (!ModelState.IsValid || personId == 0)
             {
                 return Json(new {Message = "Failed", ModelState = ModelState});
             }
@@ -71,12 +81,12 @@ namespace Socialease.Controllers.Api
             return Json(new {Message = "Failed", ModelState = ModelState});
         }
 
-        [HttpPost("{id}")]
-        public JsonResult Post(int id, [FromBody] NoteViewModel vm)
+        [HttpPost("{noteId}")]
+        public JsonResult Post(int personId, int noteId, [FromBody] NoteViewModel vm)
         {
             var errorMessage = "Failed to update a note.";
             Response.StatusCode = (int) HttpStatusCode.BadRequest;
-            if (!ModelState.IsValid || id != vm.Id)
+            if (!ModelState.IsValid || noteId != vm.Id)
             {
                 _logger.LogError(errorMessage);
                 return Json(errorMessage);

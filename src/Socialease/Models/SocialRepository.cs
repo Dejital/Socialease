@@ -127,6 +127,21 @@ namespace Socialease.Models
             }
         }
 
+        public IEnumerable<Note> GetUserNotes(int personId, string name)
+        {
+            try
+            {
+                return _context.Notes
+                    .Where(n => n.UserName == name && n.PersonId == personId)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not get notes from database.", ex);
+                throw;
+            }
+        }
+
         #endregion Notes
     }
 }
