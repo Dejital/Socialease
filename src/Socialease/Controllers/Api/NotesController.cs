@@ -63,6 +63,8 @@ namespace Socialease.Controllers.Api
             try
             {
                 var note = Mapper.Map<Note>(vm);
+                note.Created = DateTime.Now;
+                note.PersonId = personId;
                 note.UserName = User.Identity.Name;
                 _logger.LogInformation("Attempting to save a new note.");
                 _repository.AddNote(note);

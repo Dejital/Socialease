@@ -8,6 +8,5 @@ namespace Socialease.ViewModels
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public int PersonId { get; set; }
-        public int PingId { get; set; }
     }
 }

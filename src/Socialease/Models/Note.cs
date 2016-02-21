@@ -9,6 +9,5 @@ namespace Socialease.Models
         public DateTime Created { get; set; }
         public string UserName { get; set; }
         public int PersonId { get; set; }
-        public int PingId { get; set; }
     }
 }
