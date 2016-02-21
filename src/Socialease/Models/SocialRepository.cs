@@ -110,7 +110,7 @@ namespace Socialease.Models
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Could not add new note to the database.", ex);
+                _logger.LogError("Could not add new note to the database.", ex);
                 throw;
             }
         }
@@ -143,5 +143,80 @@ namespace Socialease.Models
         }
 
         #endregion Notes
+
+        #region Pings
+
+        public IEnumerable<Ping> GetAllPings(int personId, string name)
+        {
+            try
+            {
+                return _context.Pings.Where(p => p.PersonId == personId && p.UserName == name).ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not get all pings from the database.", ex);
+                throw;
+            }
+        }
+
+        public void AddPing(Ping ping)
+        {
+            try
+            {
+                _context.Add(ping);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not add new ping to the database.", ex);
+                throw;
+            }
+        }
+
+        public Ping FindPing(int id, string name)
+        {
+            try
+            {
+                return _context.Pings
+                    .FirstOrDefault(p => p.Id == id && p.UserName == name);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Could not get ping with id {id} from database.", ex);
+                throw;
+            }
+        }
+
+        public Ping RemovePing(int id, string name)
+        {
+            try
+            {
+                var ping = _context.Pings.FirstOrDefault(p => p.Id == id && p.UserName == name);
+                if (ping != null)
+                {
+                    _context.Pings.Remove(ping);
+                }
+                return ping;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Could not remove ping with id {id} from database.", ex);
+                throw;
+            }
+        }
+
+        public void UpdatePing(Ping ping)
+        {
+            try
+            {
+                _context.Pings.Update(ping);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Could not update ping with id {ping.Id} from database.", ex);
+                throw;
+            }
+        }
+
+        #endregion Pings
     }
 }

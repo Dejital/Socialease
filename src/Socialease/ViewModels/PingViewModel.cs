@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
-namespace Socialease.Models
+namespace Socialease.ViewModels
 {
-    public class Ping
+    public class PingViewModel
     {
         public int Id { get; set; }
         public string Description { get; set; }

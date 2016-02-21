@@ -18,5 +18,11 @@ namespace Socialease.Models
         void AddNote(Note note);
         void UpdateNote(Note note);
         IEnumerable<Note> GetUserNotes(int personId, string name);
+
+        IEnumerable<Ping> GetAllPings(int personId, string name);
+        void AddPing(Ping ping);
+        Ping FindPing(int id, string name);
+        Ping RemovePing(int id, string name);
+        void UpdatePing(Ping ping);
     }
 }
