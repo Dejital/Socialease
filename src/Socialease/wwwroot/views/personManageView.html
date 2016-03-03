@@ -34,7 +34,7 @@
                        placeholder="Name"
                        ng-show="vm.isEditing"
                        ng-model="vm.person.name"
-                       required />
+                       required/>
                 <p ng-show="!vm.isEditing"
                    class="form-control-static">
                     {{ vm.person.name }}
@@ -94,7 +94,7 @@
                        id="location"
                        placeholder="Location"
                        ng-show="vm.isEditing"
-                       ng-model="vm.person.location" />
+                       ng-model="vm.person.location"/>
                 <p ng-show="!vm.isEditing"
                    class="form-control-static">
                     {{ vm.person.location }}
@@ -109,7 +109,7 @@
                        id="priority"
                        placeholder="Priority"
                        ng-show="vm.isEditing"
-                       ng-model="vm.person.priority" />
+                       ng-model="vm.person.priority"/>
                 <p ng-show="!vm.isEditing"
                    class="form-control-static">
                     {{ vm.person.priority }}
@@ -117,34 +117,47 @@
             </div>
         </div>
     </form>
+</div>
 
-    <form novalidate name="newNoteForm" ng-submit="vm.addNote()">
-        <h2>Add Note</h2>
-        <div>
-            <ul>
-                <li ng-repeat="note in vm.notes">
-                    {{ note.description }}
-                </li>
-            </ul>
-        </div>
+<div class="row">
+    <h2>Meetings</h2>
+    <div>
+        <ul>
+            <li ng-repeat="ping in vm.pings">
+                {{ ping.occurred }}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <h2>Notes</h2>
+    <div>
+        <ul>
+            <li ng-repeat="note in vm.notes">
+                {{ note.description }}
+            </li>
+        </ul>
+    </div>
+
+    <form novalidate
+          class="form-inline"
+          name="newNoteForm" 
+          ng-submit="vm.addNote()">
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="note">Note</label>
-            <div class="col-sm-10">
-                <input class="form-control"
-                       type="text"
-                       id="note"
-                       ng-model="vm.newNote.description"
-                       required
-                       ng-minlength="1"/>
-                <span ng-show="newNoteForm.note.$error.required"
-                      class="text-warning">Note is required.</span>
-            </div>
+            <label class="control-label" for="note">New Note</label>
+            <input class="form-control"
+                   type="text"
+                   id="note"
+                   ng-model="vm.newNote.description"
+                   required
+                   ng-minlength="1"/>
+            <span ng-show="newNoteForm.note.$error.required"
+                  class="text-warning">Note is required.</span>
         </div>
-        <div class="form-group">
-            <input type="submit"
-                   value="Add"
-                   class="btn btn-primary"
-                   ng-disabled="newNoteForm.$invalid" />
-        </div>
+        <input type="submit"
+               value="Add"
+               class="btn btn-primary"
+               ng-disabled="newNoteForm.$invalid" />
     </form>
 </div>

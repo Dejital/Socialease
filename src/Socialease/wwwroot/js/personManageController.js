@@ -16,6 +16,7 @@
         vm.isEditing = false;
         vm.newNote = {};
         vm.notes = [];
+        vm.pings = [];
 
         $http.get('/api/people/' + $routeParams.id)
             .then(function(response) {
@@ -30,6 +31,16 @@
         $http.get('/api/people/' + $routeParams.id + '/notes')
 	        .then(function (response) {
 	            angular.copy(response.data, vm.notes);
+	        }, function (error) {
+	            vm.errorMessage = 'Failed to load data. ' + error;
+	        })
+	        .finally(function () {
+	            vm.isBusy = false;
+	        });
+
+        $http.get('/api/people/' + $routeParams.id + '/pings')
+	        .then(function (response) {
+	            angular.copy(response.data, vm.pings);
 	        }, function (error) {
 	            vm.errorMessage = 'Failed to load data. ' + error;
 	        })
