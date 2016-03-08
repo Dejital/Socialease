@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
@@ -32,7 +33,7 @@ namespace Socialease.Controllers.Api
                 {
                     return Json(null);
                 }
-                return Json(Mapper.Map<PingViewModel>(results));
+                return Json(Mapper.Map<IEnumerable<PingViewModel>>(results));
             }
             catch (Exception ex)
             {
