@@ -1,16 +1,16 @@
 ﻿<div class="row" style="margin-bottom: 2em;">
     <div class="pull-left">
-        <a href="#/" class="btn btn-sm btn-default">
+        <a href="#/" class="btn btn-default">
             <i class="fa fa-angle-left"></i> Back
         </a>
     </div>
     <div class="pull-right">
-        <a ng-show="!vm.isEditing" class="btn btn-sm btn-default" ng-click="vm.editCommand()">
+        <a ng-show="!vm.isEditing" class="btn btn-default" ng-click="vm.editCommand()">
             <i class="fa fa-pencil"></i> Edit
         </a>
         <div ng-show="vm.isEditing">
-            <a class="btn btn-sm btn-default" ng-click="vm.cancelCommand()">Cancel</a>
-            <a class="btn btn-sm btn-primary" ng-click="vm.saveCommand()">Save Changes</a>
+            <a class="btn btn-default" ng-click="vm.cancelCommand()">Cancel</a>
+            <a class="btn btn-primary" ng-click="vm.saveCommand()">Save Changes</a>
         </div>
     </div>
 </div>

@@ -1,1 +1,11 @@
-﻿
+﻿header {
+    margin-bottom: 20px;
+}
+
+#people-section {
+}
+
+#person-card {
+    padding: 10px 15px;
+    margin-bottom: 5px;
+}

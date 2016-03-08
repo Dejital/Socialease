@@ -1,16 +1,35 @@
-﻿<div class="row">
-    <div ng-show="vm.errorMessage" class="text-danger">{{ vm.errorMessage }}</div>
-    <spinner display="vm.isBusy"></spinner>
-    <table class="table table-responsive table-striped">
-        <tr ng-repeat="person in vm.people">
-            <td>{{ person.name }}</td>
-            <td>{{ person.lastPing | date }}</td>
-            <td>
-                <a ng-href="#/{{ person.id }}" class="btn btn-sm btn-primary">Manage</a>
-            </td>
-        </tr>
-    </table>
+﻿<header class="row">
+    <a class="btn btn-primary" href="/">
+        <i class="fa fa-user"></i>
+        Socialease
+    </a>
 
+    <div class="pull-right">
+        <a class="btn btn-default">
+            <i class="fa fa-plus "></i> Add
+        </a>
+        <a class="btn btn-default">
+            <i class="fa fa-search "></i> Filter
+        </a>
+    </div>
+</header>
+
+<div id="people-section" class="row">
+    <div ng-repeat="person in vm.people">
+        <div id="person-card"
+             class="img-rounded"
+             ng-class="{'bg-primary': person.isActive}">
+            <a class="btn btn-default btn-sm"
+               ng-click="person.isActive = !person.isActive">{{ person.name }}</a>
+            <div class="pull-right" ng-show="person.isActive">
+                <a ng-href="#/{{ person.id }}" 
+                   class="btn btn-default btn-sm">Manage</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <form novalidate name="newPersonForm" ng-submit="vm.addPerson()">
         <h2>Add Person</h2>
         <div class="form-group">
