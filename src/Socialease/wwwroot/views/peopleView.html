@@ -4,24 +4,31 @@
         Socialease
     </a>
 
-    <div class="pull-right">
-        <a class="btn btn-default">
-            <i class="fa fa-plus "></i> Add
+    <div class="pull-right form-inline">
+        <input type="text"
+               class="form-control"
+               id="nameFilter" 
+               ng-show="vm.isFilterSeen"
+               ng-model="vm.nameFilter"
+               placeholder="Type to filter names" />
+        <a class="btn btn-default"
+           ng-click="vm.toggleFilter()">
+            <i class="fa fa-search "></i> Filter
         </a>
         <a class="btn btn-default">
-            <i class="fa fa-search "></i> Filter
+            <i class="fa fa-plus "></i> Add
         </a>
     </div>
 </header>
 
 <div id="people-section" class="row">
-    <div ng-repeat="person in vm.people">
+    <div ng-repeat="person in vm.people | filter:vm.nameFilter">
         <div id="person-card"
              class="img-rounded"
-             ng-class="{'bg-primary': person.isActive}">
-            <a class="btn btn-default btn-sm"
-               ng-click="person.isActive = !person.isActive">{{ person.name }}</a>
-            <div class="pull-right" ng-show="person.isActive">
+             ng-click="vm.selected.value = $index"
+             ng-class="{'bg-primary': vm.selected.value == $index}">
+            {{ person.name }}
+            <div class="pull-right" ng-show="vm.selected.value == $index">
                 <a ng-href="#/{{ person.id }}" 
                    class="btn btn-default btn-sm">Manage</a>
             </div>
