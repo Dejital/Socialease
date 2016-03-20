@@ -1,0 +1,1 @@
+!function(){var e=$("#username");e.text("Serge Nevsky"),e.on("mouseenter",function(){e.style="color: green"}),e.on("mouseleave",function(){e.style=""})}();

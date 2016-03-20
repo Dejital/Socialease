@@ -1,0 +1,1 @@
+!function(){"use strict";function e(){return{scope:{show:"=display"},restrict:"E",templateUrl:"/views/spinner.html"}}angular.module("basicControls",[]).directive("spinner",e)}();
